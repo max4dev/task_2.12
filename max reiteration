@@ -1,0 +1,32 @@
+task_2.12
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        int[] numbers = {1, 2, 2, 2, 2, 3, 4, 5, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9};
+        int numbersPossibleReiteration = numbers.length / 2;
+        int reiteration = 0;                                        // счетчик повторений
+        int [] reiterations = new int[numbersPossibleReiteration];  // массив повторений
+        int reiterationsMax = 0;                                    // максимальное повторение из массива
+        int j = 0;                                                  // переменная номера ячейки массива
+
+        for (int i = 0; i < numbers.length-1; i++) {
+            if (numbers[i] == numbers[i + 1]) {
+               reiteration++;
+
+               if (i == numbers.length-2 || numbers [i+1] != numbers[i+2]) {
+                   reiterations [j] = reiteration;
+                   j++;
+                   reiteration = 0;
+               }
+            }
+        }
+
+        for (int i = 0; i < reiterations.length-1; i++) {
+            if (reiterations [i] > reiterationsMax) {
+                reiterationsMax = reiterations [i];
+            }
+        }
+        System.out.println("Наибольшее число повторений в массиве равно: " + reiterationsMax);
+    }
