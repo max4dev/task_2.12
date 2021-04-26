@@ -1,0 +1,53 @@
+
+
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        int[] numbers = {1, 2, 2, 2, 2, 2, 4, 5, 5, 5, 5, 5, 5, 5, 5, 4, 4, 4, 9, 9, 9, 9, 9, 9, 9};
+        //
+        int numbersPossibleIteration = numbers.length / 2;
+        int iteration = 0;                                                      // счетчик повторений, одновременно, в массиве повторяющихся чисел будет переменной ряда
+        int iterations [] = new int[numbersPossibleIteration];                  // массив повторений
+        int j = 0;                                                              // переменная номера ячейки массива повторений
+        int numbersInArray [] [] = new int [numbersPossibleIteration] [];       // массив повторяющихся чисел в каждом iteration
+        int line = 0;                                                           //переменная строки в массиве повторяющихся чисел
+
+
+        for (int i = 0; i < numbers.length-1; i++) {                             // считаем повторяющиеся числа
+            if (numbers[i] == numbers[i + 1]) {
+               iteration++;
+
+               if (i == numbers.length-2 || numbers [i+1] != numbers[i+2]) {     // заносим количество повторений в массив iterations[]
+                   iterations [j] = iteration+1;
+                   j++;
+
+                   numbersInArray [line] = new int [iteration+1];
+                   for (int y = 0; y < iteration+1; y++) {                      // заносим значения повторяющихся чисел в массив  numbersInArray[][]
+                       numbersInArray [line] [y] = numbers [i];
+                   }
+                   line++;
+                   iteration = 0;
+               }
+            }
+        }
+
+        for (int i = 0; i < line; i++) {                                        //определяем максимальное количество повторений в массиве iterations[]
+            if (iterations[i] > iteration) {
+                iteration = iterations[i];
+            }
+        }
+        System.out.println("Максимальное кол-во повторов: " + iteration);
+
+        for (int i = 0; i < line; i++) {                                       // выводим значения повторяющихся чисел в строке с максимальным количеством повторений
+            if (iterations[i] == iteration) {
+                iteration = iterations[i];
+                System.out.print("Элементы в повторе: ");
+                for (int k = 0; k < iteration; k++) {
+                    System.out.print(numbersInArray [i] [k] + " ");
+                }
+            }
+        }
+    }
+}
